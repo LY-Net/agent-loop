@@ -1,0 +1,30 @@
+1.初始化 Alembic
+-- alembic init migrations
+
+2.修改 migrations/env.py
+找到：target_metadata = None
+替换成：
+    from app.db.base import Base
+    from app.models.observability import (
+        AgentTrace,
+        AgentRun,
+        AgentSpan,
+        AgentEvent
+    )
+
+    target_metadata = Base.metadata
+
+3.在env.py增加（% 转义是为了避免 Alembic 配置解析特殊字符。）
+    from app.core.config import settings
+
+    config.set_main_option(
+        "sqlalchemy.url",
+        settings.database_url.replace("%", "%%")
+    )
+
+4.生成数据库迁移文件
+--alembic revision --autogenerate -m "create observability tables"
+
+5.创建生成表
+--alembic upgrade head
+

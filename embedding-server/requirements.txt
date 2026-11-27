@@ -1,0 +1,13 @@
+# BGE-M3
+FlagEmbedding==1.4.2
+transformers==5.23.0
+numpy==2.4.6
+torch==2.15.0+cpu
+
+# API Server
+fastapi==0.165.0
+uvicorn==0.54.0
+httpx==0.28.1
+
+# Configuration
+pydantic-settings==2.16.3
