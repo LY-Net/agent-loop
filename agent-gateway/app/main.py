@@ -25,6 +25,7 @@ from app.embedding.spaces.defaults import register_default_spaces
 from app.embedding.spaces.persistence import (
     EmbeddingSpacePersistenceService,
 )
+from app.api.tool_discovery import router as tool_discovery_router
 
 
 @asynccontextmanager
@@ -165,6 +166,7 @@ app.include_router(agent_router)
 app.include_router(trace_router)
 app.include_router(tool_server_router)
 app.include_router(rag_router)
+app.include_router(tool_discovery_router)
 
 @app.get("/health")
 async def health_check():
