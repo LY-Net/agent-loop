@@ -197,7 +197,7 @@ class CatalogToolCreate(BaseModel):
     )
 
     description: str = Field(
-        min_length=1,
+        default="",
         max_length=2000,
     )
 
