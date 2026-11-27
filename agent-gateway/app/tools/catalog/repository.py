@@ -412,7 +412,6 @@ class ToolCatalogRepository:
                 CatalogTool.status,
             ).where(
                 CatalogTool.server_id == server_id,
-                CatalogTool.status != "deleted",
             ).order_by(
                 CatalogTool.name
             )

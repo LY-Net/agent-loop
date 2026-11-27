@@ -11,6 +11,8 @@ from app.tools.catalog.repository import ToolCatalogRepository
 from app.tools.catalog.service import ToolCatalogService
 from app.tools.catalog.schemas import ToolServerCreate
 
+from app.embedding.dependencies import get_embedding_space_service
+from app.embedding.spaces.service import EmbeddingSpaceService
 
 router = APIRouter(
     prefix="/tool-servers",
@@ -25,6 +27,9 @@ router = APIRouter(
 
 async def get_tool_catalog_service(
     db: AsyncSession = Depends(get_db),
+    embedding_space_service: EmbeddingSpaceService = Depends(
+        get_embedding_space_service
+    ),
 ) -> ToolCatalogService:
 
     repository = ToolCatalogRepository(
@@ -33,6 +38,7 @@ async def get_tool_catalog_service(
 
     return ToolCatalogService(
         repository=repository,
+        embedding_space_service=embedding_space_service,
     )
 
 # ============================================================

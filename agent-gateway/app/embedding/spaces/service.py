@@ -59,3 +59,17 @@ class EmbeddingSpaceService:
 
         # 4. 调用现有 EmbeddingService
         return await self._embedding_service.embed(request)
+
+    @property
+    def model_info(self):
+        """当前 Embedding 模型元数据。"""
+        return self._embedding_service.model_info
+
+    def get_space(self, space_id: str):
+        """获取指定 Embedding Space 配置。"""
+        if not self._space_registry.has(space_id):
+            raise ValueError(
+                f"Embedding Space does not exist: {space_id}"
+            )
+
+        return self._space_registry.get(space_id)
