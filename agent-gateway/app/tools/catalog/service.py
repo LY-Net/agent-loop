@@ -45,11 +45,7 @@ from app.tools.catalog.schemas import (
 from typing import Any
 
 from app.tools.providers.mcp import mcp_provider
-from app.tools.catalog.repository import (
-    ToolCatalogRepository,
-    tool_catalog_repository,
-)
-
+from app.tools.catalog.repository import ToolCatalogRepository
 
 class ToolCatalogService:
     """
@@ -61,14 +57,10 @@ class ToolCatalogService:
 
     def __init__(
             self,
-            repository: ToolCatalogRepository | None = None,
+            repository: ToolCatalogRepository,
             provider=None,
     ):
-
-        # 数据库仓储层
-        self.repository = repository or tool_catalog_repository
-        # MCP Provider。
-        # 预留依赖注入能力，后续测试时可以传入 Mock Provider。
+        self.repository = repository
         self.provider = provider or mcp_provider
 
     # =========================================================
@@ -480,4 +472,4 @@ class ToolCatalogService:
 
 
 # 全局 Service 实例
-tool_catalog_service = ToolCatalogService()
+# tool_catalog_service = ToolCatalogService()

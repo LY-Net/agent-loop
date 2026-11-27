@@ -27,12 +27,13 @@ async def get_tool_catalog_service(
     db: AsyncSession = Depends(get_db),
 ) -> ToolCatalogService:
 
-    repository = ToolCatalogRepository()
+    repository = ToolCatalogRepository(
+        session=db,
+    )
 
     return ToolCatalogService(
         repository=repository,
     )
-
 
 # ============================================================
 # 1. 注册 MCP Server
